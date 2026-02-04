@@ -14,7 +14,7 @@ function extractClassValue(node) {
   return null;
 }
 
-export default {
+const noRoundedTailwind = {
   meta: {
     type: "suggestion",
     docs: {
@@ -39,3 +39,5 @@ export default {
     };
   },
 };
+
+export default noRoundedTailwind;
