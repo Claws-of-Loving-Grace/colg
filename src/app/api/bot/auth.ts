@@ -3,14 +3,6 @@ import { getCloudflareContext } from "@opennextjs/cloudflare";
 
 const UNAUTHORIZED = NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
-function normalizeKeys(raw: string | undefined) {
-  if (!raw) return [];
-  return raw
-    .split(",")
-    .map((key) => key.trim())
-    .filter(Boolean);
-}
-
 function extractToken(request: Request) {
   const authHeader = request.headers.get("authorization") ?? "";
   if (authHeader.toLowerCase().startsWith("bearer ")) {
@@ -31,14 +23,7 @@ async function hashToken(token: string) {
 
 export async function requireBotAuth(request: Request) {
   const { env } = getCloudflareContext();
-  const keys = normalizeKeys(env.BOT_API_KEYS);
   const token = extractToken(request);
-
-  if (!token || keys.length === 0) {
-    // continue to DB lookup below
-  } else if (keys.includes(token)) {
-    return { ok: true, token } as const;
-  }
 
   if (!token) {
     return { ok: false, response: UNAUTHORIZED } as const;
