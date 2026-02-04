@@ -3,8 +3,6 @@ import { getCloudflareContext } from "@opennextjs/cloudflare";
 import { scanText } from "@/middleware/scan";
 import { ulid } from "@/lib/ulid";
 
-export const runtime = "edge";
-
 type IdeaPayload = {
   title: string;
   problem: string;
