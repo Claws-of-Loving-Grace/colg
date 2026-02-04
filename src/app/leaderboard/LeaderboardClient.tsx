@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { cn } from "@/lib/utils";
 
 const statusOptions = [
@@ -53,6 +54,37 @@ function statusVariant(status: string): "primary" | "secondary" | "accent" {
   if (status === "shipped") return "accent";
   if (status === "building") return "primary";
   return "secondary";
+}
+
+function LeaderboardSkeleton() {
+  return (
+    <div className="flex flex-col gap-4">
+      {Array.from({ length: 6 }, (_, index) => (
+        <div
+          key={`skeleton-${index}`}
+          className="border-2 border-ink/40 bg-paper p-4"
+        >
+          <div className="flex flex-col gap-4 md:grid md:grid-cols-[110px_minmax(0,1fr)_180px] md:items-start">
+            <div className="flex items-start gap-3">
+              <Skeleton className="h-12 w-12" />
+              <Skeleton className="h-4 w-20" />
+            </div>
+            <div className="flex flex-col gap-3">
+              <Skeleton className="h-6 w-4/5" />
+              <div className="flex flex-wrap gap-2">
+                <Skeleton className="h-6 w-24" />
+                <Skeleton className="h-4 w-40" />
+              </div>
+            </div>
+            <div className="flex flex-col gap-3">
+              <Skeleton className="h-6 w-24" />
+              <Skeleton className="h-4 w-24" />
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 function toHref(value: string | null) {
@@ -205,7 +237,9 @@ export function LeaderboardClient() {
           <span>Status</span>
         </div>
         {loading ? (
-          <div className="p-6 text-sm text-ink/70">Loading leaderboard...</div>
+          <div className="p-6">
+            <LeaderboardSkeleton />
+          </div>
         ) : error ? (
           <div className="p-6 text-sm text-ink/70">{error}</div>
         ) : ideas.length === 0 ? (
@@ -267,10 +301,6 @@ export function LeaderboardClient() {
                   </span>
                   {idea.status === "shipped" && (
                     <div className="flex flex-col gap-2 text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
-                      {(() => {
-                        const deployHref = toHref(idea.deploy_url ?? idea.shipped_url);
-                        return (
-                          <>
                       {idea.receipt_id ? (
                         <Link
                           href={`/ideas/${idea.id}#receipt`}
@@ -281,21 +311,24 @@ export function LeaderboardClient() {
                       ) : (
                         <span>Receipt pending</span>
                       )}
-                      {deployHref ? (
-                        <a
-                          href={deployHref}
-                          className="underline decoration-2 decoration-accent underline-offset-4"
-                          target="_blank"
-                          rel="noreferrer"
-                        >
-                          Deployed URL
-                        </a>
-                      ) : (
-                        <span>
-                          {idea.deploy_url ?? idea.shipped_url ?? "No deployed URL"}
-                        </span>
-                      )}
-                          </>
+                      {(() => {
+                        const deployHref = toHref(idea.deploy_url ?? idea.shipped_url);
+                        if (!deployHref) {
+                          return (
+                            <span>
+                              {idea.deploy_url ?? idea.shipped_url ?? "No deployed URL"}
+                            </span>
+                          );
+                        }
+                        return (
+                          <a
+                            href={deployHref}
+                            className="underline decoration-2 decoration-accent underline-offset-4"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Deployed URL
+                          </a>
                         );
                       })()}
                     </div>

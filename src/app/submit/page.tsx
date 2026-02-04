@@ -1,5 +1,10 @@
 import { SubmitForm } from "./SubmitForm";
 
+export const metadata = {
+  title: "Submit an Idea",
+  description: "Send a focused kindness micro-product idea to the public loop.",
+};
+
 export default function SubmitPage() {
   return (
     <div className="flex flex-col gap-8">

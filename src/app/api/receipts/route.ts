@@ -12,6 +12,7 @@ type ReceiptListRow = {
   who_it_helps: string;
   mvp_scope: string;
   deploy_url: string | null;
+  next_steps: string | null;
 };
 
 function parseLimit(value: string | null) {
@@ -42,6 +43,7 @@ export async function GET(request: Request) {
       r.metric,
       r.shipped_url,
       r.created_at,
+      r.next_steps,
       i.title as idea_title,
       i.who_it_helps,
       i.mvp_scope,

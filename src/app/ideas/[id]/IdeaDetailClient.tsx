@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { Badge } from "@/components/ui/badge";
+import { Skeleton } from "@/components/ui/skeleton";
 import { Textarea } from "@/components/ui/textarea";
 import { IdeaVotePanel } from "./IdeaVotePanel";
 
@@ -93,6 +94,43 @@ type IdeaDetailClientProps = {
   ideaId: string;
 };
 
+function IdeaDetailSkeleton() {
+  return (
+    <section className="border-2 border-ink bg-paper p-6">
+      <div className="flex flex-col gap-8 lg:grid lg:grid-cols-[minmax(0,1fr)_260px] lg:items-start">
+        <div className="flex flex-col gap-6">
+          <div className="flex flex-wrap items-center gap-3">
+            <Skeleton className="h-6 w-24" />
+            <Skeleton className="h-4 w-48" />
+          </div>
+          <Skeleton className="h-10 w-4/5" />
+          <div className="flex flex-col gap-3">
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-11/12" />
+            <Skeleton className="h-4 w-10/12" />
+          </div>
+        </div>
+        <div className="flex flex-col gap-4 border-2 border-ink/60 bg-muted p-4">
+          <Skeleton className="h-6 w-20" />
+          <Skeleton className="h-10 w-full" />
+        </div>
+      </div>
+      <div className="mt-8 grid gap-6 lg:grid-cols-3">
+        {Array.from({ length: 3 }, (_, index) => (
+          <div
+            key={`skeleton-card-${index}`}
+            className="flex flex-col gap-2 border-2 border-ink/60 bg-muted p-4"
+          >
+            <Skeleton className="h-3 w-24" />
+            <Skeleton className="h-4 w-full" />
+            <Skeleton className="h-4 w-5/6" />
+          </div>
+        ))}
+      </div>
+    </section>
+  );
+}
+
 export function IdeaDetailClient({ ideaId }: IdeaDetailClientProps) {
   const [idea, setIdea] = useState<IdeaDetail | null>(null);
   const [loading, setLoading] = useState(true);
@@ -171,11 +209,7 @@ export function IdeaDetailClient({ ideaId }: IdeaDetailClientProps) {
   }, [idea]);
 
   if (loading) {
-    return (
-      <section className="border-2 border-ink bg-paper p-6 text-sm text-ink/70">
-        Loading idea...
-      </section>
-    );
+    return <IdeaDetailSkeleton />;
   }
 
   if (error || !idea) {
