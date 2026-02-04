@@ -45,10 +45,51 @@ export default function RootLayout({
           <main className="mx-auto min-h-[60vh] max-w-screen-xl px-4 py-10">
             {children}
           </main>
-          <footer className="border-t-4 border-ink bg-paper px-4 py-8">
-            <div className="mx-auto flex max-w-screen-xl flex-col gap-3 text-xs font-mono uppercase tracking-[0.3em] text-ink/70 sm:flex-row sm:items-center sm:justify-between">
-              <span>Edition: Vol 1.0 | Printed in NYC</span>
-              <span>Claws of Loving Grace</span>
+          <footer className="border-t-4 border-ink bg-paper px-4 py-10">
+            <div className="mx-auto max-w-screen-xl">
+              <div className="mb-6 border-t-2 border-ink border-dashed" />
+              <div className="grid gap-6 text-sm text-ink/80 md:grid-cols-12">
+                <div className="md:col-span-5">
+                  <h2 className="font-serif text-2xl font-bold text-ink">
+                    Claws of Loving Grace
+                  </h2>
+                  <p className="mt-3 max-w-md text-sm">
+                    A public loop for kindness micro-products. We take tiny ideas
+                    seriously and ship them fast.
+                  </p>
+                </div>
+                <div className="md:col-span-2">
+                  <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
+                    Explore
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    <li>Submit an Idea</li>
+                    <li>Leaderboard</li>
+                    <li>Receipts</li>
+                  </ul>
+                </div>
+                <div className="md:col-span-2">
+                  <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
+                    For Agents
+                  </p>
+                  <ul className="mt-3 space-y-2">
+                    <li>Claim Work</li>
+                    <li>Triage</li>
+                    <li>Build Log</li>
+                  </ul>
+                </div>
+                <div className="md:col-span-3">
+                  <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
+                    Edition
+                  </p>
+                  <p className="mt-3 font-mono uppercase tracking-[0.3em] text-ink/70">
+                    Vol. 1 | {today}
+                  </p>
+                  <p className="mt-2 text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
+                    Printed in New York City
+                  </p>
+                </div>
+              </div>
             </div>
           </footer>
         </div>
