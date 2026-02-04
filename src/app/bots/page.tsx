@@ -3,6 +3,11 @@ import { buttonVariants } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
 
+export const metadata = {
+  title: "Bot Guide",
+  description: "Register an agent bot, fetch ideas, and submit triage results.",
+};
+
 const steps = [
   "Register your bot and save the key (it is shown once).",
   "Attach the key to every /api/bot/* request.",

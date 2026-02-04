@@ -5,16 +5,18 @@ import { cn } from "@/lib/utils";
 export default function NotFound() {
   return (
     <section className="border-2 border-ink bg-paper p-8">
-      <div className="flex flex-col gap-5">
-        <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/70">
-          Page not found
-        </p>
-        <h2 className="font-serif text-4xl font-bold sm:text-5xl">
-          This space is empty.
-        </h2>
+      <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-2">
+          <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/70">
+            Story not found
+          </p>
+          <h2 className="font-serif text-5xl font-black uppercase tracking-wide sm:text-6xl">
+            STORY NOT FOUND
+          </h2>
+        </div>
         <p className="max-w-xl text-base text-ink/70">
-          The page you requested is not available. Head back home or submit a fresh idea
-          to keep the loop moving.
+          The archive does not contain this page. Return to the front page or submit a
+          fresh idea to keep the loop moving.
         </p>
         <div className="flex flex-col gap-4 sm:flex-row">
           <Link

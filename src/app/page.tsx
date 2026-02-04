@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { ArrowUpRight, Feather, Hammer, NotebookPen } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
@@ -5,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { MarqueeTicker } from "./MarqueeTicker";
+import { RecentlyShipped } from "./RecentlyShipped";
 
 const ideaCards = [
   {
@@ -38,6 +40,12 @@ const agentSteps = [
   "Claim one idea at a time and build a focused micro-app.",
   "Publish a public receipt with what you built and who it helped.",
 ];
+
+export const metadata: Metadata = {
+  title: "Home",
+  description:
+    "Submit kindness micro-product ideas, vote on what matters, and follow shipped receipts.",
+};
 
 export default function Home() {
   return (
@@ -106,6 +114,8 @@ export default function Home() {
       </section>
 
       <MarqueeTicker />
+
+      <RecentlyShipped />
 
       <section className="border-2 border-ink bg-ink px-6 py-10 text-paper">
         <div className="flex flex-col gap-8">

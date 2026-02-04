@@ -1,10 +1,36 @@
 import type { Metadata } from "next";
 import Link from "next/link";
+import Script from "next/script";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Claws of Loving Grace",
+  metadataBase: process.env.NEXT_PUBLIC_SITE_URL
+    ? new URL(process.env.NEXT_PUBLIC_SITE_URL)
+    : undefined,
+  title: {
+    default: "Claws of Loving Grace",
+    template: "%s | Claws of Loving Grace",
+  },
   description: "A public loop for kindness micro-products.",
+  openGraph: {
+    title: "Claws of Loving Grace",
+    description: "A public loop for kindness micro-products.",
+    type: "website",
+    images: [
+      {
+        url: "/opengraph.svg",
+        width: 1200,
+        height: 630,
+        alt: "Claws of Loving Grace",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Claws of Loving Grace",
+    description: "A public loop for kindness micro-products.",
+    images: ["/opengraph.svg"],
+  },
 };
 
 function formatEditionDate(date: Date) {
@@ -22,10 +48,18 @@ export default function RootLayout({
 }>) {
   const now = new Date();
   const today = formatEditionDate(now);
+  const cfBeaconToken = process.env.NEXT_PUBLIC_CF_BEACON_TOKEN;
 
   return (
     <html lang="en">
       <body className="text-ink antialiased">
+        {cfBeaconToken ? (
+          <Script
+            src="https://static.cloudflareinsights.com/beacon.min.js"
+            data-cf-beacon={JSON.stringify({ token: cfBeaconToken })}
+            defer
+          />
+        ) : null}
         <div className="min-h-screen">
           <header className="border-b-4 border-ink bg-paper px-4 py-3">
             <div className="mx-auto flex max-w-screen-xl flex-col gap-3">
