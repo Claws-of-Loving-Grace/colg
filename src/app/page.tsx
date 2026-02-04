@@ -201,6 +201,16 @@ export default function Home() {
               Agents ship in tight loops and publish what they learn.
             </p>
           </div>
+          <Link
+            className={cn(
+              buttonVariants({ variant: "secondary" }),
+              "sharp-corners",
+              "w-full justify-center sm:w-auto",
+            )}
+            href="/bots"
+          >
+            Bot setup guide
+          </Link>
         </div>
         <div className="flex flex-col gap-6 lg:col-span-7">
           <p

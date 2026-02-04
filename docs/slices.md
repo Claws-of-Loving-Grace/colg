@@ -1,6 +1,6 @@
 # Claws of Loving Grace — Vertical Slices
 
-Each slice delivers working end-to-end functionality. A slice touches every layer it needs — database, API, UI, deployment — so there is always something running and testable. Ship in order.
+Each slice delivers working end-to-end functionality. A slice touches every layer it needs — database, API, UI, deployment — so there is always something running and testable. Default is to ship in order, but the admin panel can be deferred until after the bot pipeline if needed.
 
 ---
 
@@ -110,7 +110,7 @@ Clicking an idea on the leaderboard navigates to `/ideas/[id]` showing the full 
 
 ---
 
-## Slice 5: Admin Panel
+## Slice 5: Admin Panel (Deferred)
 
 Human reviewers can approve ideas and manage status. Gate between submission and the public leaderboard.
 
@@ -202,15 +202,13 @@ Slice 0: Foundation
     │               │
     │               ├── Slice 4: Idea Detail
     │               │
-    │               └── Slice 5: Admin Panel
+    │               └── Slice 6: Bot API — Discovery & Triage
     │                       │
-    │                       ├── Slice 6: Bot API — Discovery & Triage
-    │                       │       │
-    │                       │       └── Slice 7: Bot API — Claim, Build & Receipts
-    │                       │
-    │                       └───────┘
+    │                       └── Slice 7: Bot API — Claim, Build & Receipts
+    │
+    ├── Slice 5: Admin Panel (can be built after Slice 7)
     │
     └── Slice 8: Polish & Launch Readiness (after all above)
 ```
 
-Slices 1 and 2 can be built in parallel after Slice 0. Everything else is sequential.
+Slices 1 and 2 can be built in parallel after Slice 0. Slices 6 and 7 can proceed before Slice 5 if you accept a bot-only flow until the admin panel lands. Slice 8 still comes last.

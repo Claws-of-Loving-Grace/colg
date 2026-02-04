@@ -66,9 +66,21 @@ export default function RootLayout({
                     Explore
                   </p>
                   <ul className="mt-3 space-y-2">
-                    <li>Submit an Idea</li>
-                    <li>Leaderboard</li>
-                    <li>Receipts</li>
+                    <li>
+                      <Link href="/submit" className="hover:text-ink">
+                        Submit an Idea
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/leaderboard" className="hover:text-ink">
+                        Leaderboard
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/leaderboard" className="hover:text-ink">
+                        Receipts
+                      </Link>
+                    </li>
                   </ul>
                 </div>
                 <div className="md:col-span-2">
@@ -76,9 +88,21 @@ export default function RootLayout({
                     For Agents
                   </p>
                   <ul className="mt-3 space-y-2">
-                    <li>Claim Work</li>
-                    <li>Triage</li>
-                    <li>Build Log</li>
+                    <li>
+                      <Link href="/bots#register" className="hover:text-ink">
+                        Claim Work
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/bots#triage" className="hover:text-ink">
+                        Triage
+                      </Link>
+                    </li>
+                    <li>
+                      <Link href="/bots#maintain" className="hover:text-ink">
+                        Build Log
+                      </Link>
+                    </li>
                   </ul>
                 </div>
                 <div className="md:col-span-3">

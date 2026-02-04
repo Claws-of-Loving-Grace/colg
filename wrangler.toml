@@ -7,6 +7,7 @@ assets = { directory = ".open-next/assets", binding = "ASSETS" }
 [vars]
 SCAN_DISABLE = "1"
 OPENAI_API_KEY = ""
+BOT_API_KEYS = ""
 
 [[d1_databases]]
 binding = "DB"

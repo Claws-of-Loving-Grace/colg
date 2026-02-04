@@ -13,12 +13,27 @@ type IdeaDetailRow = {
   constraints: string | null;
   links: string | null;
   status: string;
+  tags: string | null;
   score: number | null;
+  score_components: string | null;
+  triage_summary: string | null;
+  clarifying_questions: string | null;
+  clarifying_responses: string | null;
+  dedupe_cluster_id: string | null;
   submitter_email: string | null;
   created_at: string;
   updated_at: string;
   vote_count: number;
 };
+
+function parseJson<T>(raw: string | null, fallback: T): T {
+  if (!raw) return fallback;
+  try {
+    return JSON.parse(raw) as T;
+  } catch {
+    return fallback;
+  }
+}
 
 export async function GET(
   request: Request,
@@ -43,7 +58,13 @@ export async function GET(
       i.constraints,
       i.links,
       i.status,
+      i.tags,
       i.score,
+      i.score_components,
+      i.triage_summary,
+      i.clarifying_questions,
+      i.clarifying_responses,
+      i.dedupe_cluster_id,
       i.submitter_email,
       i.created_at,
       i.updated_at,
@@ -62,5 +83,13 @@ export async function GET(
     return NextResponse.json({ error: "Idea not found" }, { status: 404 });
   }
 
-  return NextResponse.json({ idea: ideaRow });
+  const idea = {
+    ...ideaRow,
+    tags: parseJson<Record<string, string>>(ideaRow.tags, {}),
+    score_components: parseJson<Record<string, number>>(ideaRow.score_components, {}),
+    clarifying_questions: parseJson<string[]>(ideaRow.clarifying_questions, []),
+    clarifying_responses: parseJson<string[]>(ideaRow.clarifying_responses, []),
+  };
+
+  return NextResponse.json({ idea });
 }
