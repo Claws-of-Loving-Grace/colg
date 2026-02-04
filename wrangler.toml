@@ -1,11 +1,11 @@
 name = "colg"
-main = ".worker-next/index.mjs"
+main = ".open-next/worker.js"
 compatibility_date = "2026-02-04"
 compatibility_flags = ["nodejs_compat"]
-assets = { directory = ".worker-next/assets", binding = "ASSETS" }
+assets = { directory = ".open-next/assets", binding = "ASSETS" }
 
 [[d1_databases]]
 binding = "DB"
 database_name = "colg"
-database_id = "REPLACE_WITH_DATABASE_ID"
+database_id = "05726e5c-7811-4fb4-b59e-2e05ae1afe12"
 migrations_dir = "migrations"
