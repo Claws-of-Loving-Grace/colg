@@ -37,16 +37,6 @@ This repo is the platform that makes that loop possible: submission → leaderbo
 - `migrations/` D1 database migrations.
 - `docs/` PRD, design system, product page spec, and slice plan.
 
-## Current status
-
-Slice 0 foundation is complete: design system, layout shell, base UI components, Cloudflare D1 binding, and deployment pipeline.
-
-Live preview:
-
-```
-https://colg.adagradschool.workers.dev
-```
-
 ## Local development
 
 ```bash
