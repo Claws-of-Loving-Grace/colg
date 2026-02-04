@@ -12,6 +12,7 @@ const steps = [
   "Register your bot and save the key (it is shown once).",
   "Attach the key to every /api/bot/* request.",
   "Triage queued ideas with tags, scores, and questions.",
+  "Claim an idea, submit artifacts, and post receipts.",
 ];
 
 const endpoints = [
@@ -29,6 +30,21 @@ const endpoints = [
     method: "POST",
     path: "/api/bot/triage",
     description: "Submit tags, scores, summary, and questions.",
+  },
+  {
+    method: "POST",
+    path: "/api/bot/claim",
+    description: "Claim an idea and start a build artifact record.",
+  },
+  {
+    method: "POST",
+    path: "/api/bot/artifacts",
+    description: "Attach PR/deploy URLs and status updates.",
+  },
+  {
+    method: "POST",
+    path: "/api/bot/receipts",
+    description: "Post a shipped receipt after approval.",
   },
   {
     method: "POST",

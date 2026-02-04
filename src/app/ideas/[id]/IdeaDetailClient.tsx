@@ -35,10 +35,32 @@ type IdeaDetail = {
   created_at: string;
   updated_at: string;
   vote_count: number;
+  build_artifact: BuildArtifact | null;
+  receipt: Receipt | null;
 };
 
 type IdeaDetailResponse = {
   idea: IdeaDetail;
+};
+
+type BuildArtifact = {
+  id: string;
+  agent_id: string;
+  pr_url: string | null;
+  deploy_url: string | null;
+  status: string;
+  claimed_at: string;
+  completed_at: string | null;
+};
+
+type Receipt = {
+  id: string;
+  artifact_id: string;
+  summary: string;
+  metric: string;
+  next_steps: string | null;
+  shipped_url: string | null;
+  created_at: string;
 };
 
 function formatStatus(status: string) {
@@ -59,6 +81,13 @@ function parseLines(value: string | null) {
     .split(/\r?\n|,/)
     .map((line) => line.trim())
     .filter(Boolean);
+}
+
+function toHref(value: string | null) {
+  if (!value) return null;
+  if (value.startsWith("http://") || value.startsWith("https://")) return value;
+  if (value.startsWith("www.")) return `https://${value}`;
+  return null;
 }
 
 type IdeaDetailClientProps = {
@@ -124,7 +153,7 @@ export function IdeaDetailClient({ ideaId }: IdeaDetailClientProps) {
         if (!response.ok) {
           throw new Error(response.status === 404 ? "Idea not found" : "Failed to load");
         }
-        const data = (await response.json()) as IdeaDetailResponse;
+          const data = (await response.json()) as IdeaDetailResponse;
         if (active) {
           const next = data.idea;
           setIdea({
@@ -135,6 +164,8 @@ export function IdeaDetailClient({ ideaId }: IdeaDetailClientProps) {
             clarifying_questions: next.clarifying_questions ?? [],
             clarifying_responses: next.clarifying_responses ?? [],
             dedupe_cluster_id: next.dedupe_cluster_id ?? null,
+            build_artifact: next.build_artifact ?? null,
+            receipt: next.receipt ?? null,
           });
         }
       } catch (err) {
@@ -298,7 +329,7 @@ export function IdeaDetailClient({ ideaId }: IdeaDetailClientProps) {
         )}
 
         <div className="mt-10 border-t-2 border-ink/60 pt-8">
-          {(tagEntries.length > 0 ||
+        {(tagEntries.length > 0 ||
             idea.score !== null ||
             idea.triage_summary ||
             idea.clarifying_questions.length > 0) && (
@@ -423,18 +454,112 @@ export function IdeaDetailClient({ ideaId }: IdeaDetailClientProps) {
               )}
             </div>
           )}
-          <div className="hidden">
-            <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-ink/60">
-              Build Status
-            </p>
-            <p className="text-sm text-ink/80">Pending build status.</p>
-          </div>
-          <div className="hidden">
-            <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-ink/60">
-              Receipt
-            </p>
-            <p className="text-sm text-ink/80">Pending public receipt.</p>
-          </div>
+          {idea.status === "building" && (
+            <div className="flex flex-col gap-3 border-2 border-ink/60 bg-paper p-4">
+              <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-ink/60">
+                Build Status
+              </p>
+              {idea.build_artifact ? (
+                <div className="flex flex-col gap-2 text-sm text-ink/80">
+                  {(() => {
+                    const prHref = toHref(idea.build_artifact.pr_url);
+                    const deployHref = toHref(idea.build_artifact.deploy_url);
+                    return (
+                      <>
+                  <span>Agent {idea.build_artifact.agent_id}</span>
+                  <span>
+                    PR:{" "}
+                    {prHref ? (
+                      <a
+                        href={prHref}
+                        className="underline decoration-2 decoration-accent underline-offset-4"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {idea.build_artifact.pr_url}
+                      </a>
+                    ) : (
+                      <span>{idea.build_artifact.pr_url ?? "Pending"}</span>
+                    )}
+                  </span>
+                  <span>
+                    Deploy:{" "}
+                    {deployHref ? (
+                      <a
+                        href={deployHref}
+                        className="underline decoration-2 decoration-accent underline-offset-4"
+                        target="_blank"
+                        rel="noreferrer"
+                      >
+                        {idea.build_artifact.deploy_url}
+                      </a>
+                    ) : (
+                      <span>{idea.build_artifact.deploy_url ?? "Pending"}</span>
+                    )}
+                  </span>
+                      </>
+                    );
+                  })()}
+                </div>
+              ) : (
+                <p className="text-sm text-ink/80">Claimed by an agent.</p>
+              )}
+            </div>
+          )}
+          {idea.status === "shipped" && (
+            <div id="receipt" className="mt-6 flex flex-col gap-3 border-2 border-ink/60 bg-paper p-4">
+              <p className="text-[11px] font-mono uppercase tracking-[0.3em] text-ink/60">
+                Receipt
+              </p>
+              {idea.receipt ? (
+                <div className="flex flex-col gap-3 text-sm text-ink/80">
+                  {(() => {
+                    const shippedHref = toHref(idea.receipt?.shipped_url ?? null);
+                    return (
+                      <>
+                  <p>{idea.receipt.summary}</p>
+                  <div className="flex flex-col gap-1">
+                    <span className="text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
+                      Metric
+                    </span>
+                    <span>{idea.receipt.metric}</span>
+                  </div>
+                  {idea.receipt.shipped_url && (
+                    <div className="flex flex-col gap-1">
+                      <span className="text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
+                        Shipped URL
+                      </span>
+                      {shippedHref ? (
+                        <a
+                          href={shippedHref}
+                          className="underline decoration-2 decoration-accent underline-offset-4"
+                          target="_blank"
+                          rel="noreferrer"
+                        >
+                          {idea.receipt.shipped_url}
+                        </a>
+                      ) : (
+                        <span>{idea.receipt.shipped_url}</span>
+                      )}
+                    </div>
+                  )}
+                  {idea.receipt.next_steps && (
+                    <div className="flex flex-col gap-1">
+                      <span className="text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
+                        Next steps
+                      </span>
+                      <span>{idea.receipt.next_steps}</span>
+                    </div>
+                  )}
+                      </>
+                    );
+                  })()}
+                </div>
+              ) : (
+                <p className="text-sm text-ink/80">Receipt pending.</p>
+              )}
+            </div>
+          )}
         </div>
       </section>
     </div>

@@ -28,6 +28,9 @@ type IdeaRow = {
   score: number | null;
   created_at: string;
   vote_count: number;
+  receipt_id: string | null;
+  shipped_url: string | null;
+  deploy_url: string | null;
 };
 
 type LeaderboardResponse = {
@@ -82,6 +85,13 @@ function LeaderboardSkeleton() {
       ))}
     </div>
   );
+}
+
+function toHref(value: string | null) {
+  if (!value) return null;
+  if (value.startsWith("http://") || value.startsWith("https://")) return value;
+  if (value.startsWith("www.")) return `https://${value}`;
+  return null;
 }
 
 export function LeaderboardClient() {
@@ -289,6 +299,40 @@ export function LeaderboardClient() {
                       year: "numeric",
                     })}
                   </span>
+                  {idea.status === "shipped" && (
+                    <div className="flex flex-col gap-2 text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
+                      {idea.receipt_id ? (
+                        <Link
+                          href={`/ideas/${idea.id}#receipt`}
+                          className="underline decoration-2 decoration-accent underline-offset-4"
+                        >
+                          View receipt
+                        </Link>
+                      ) : (
+                        <span>Receipt pending</span>
+                      )}
+                      {(() => {
+                        const deployHref = toHref(idea.deploy_url ?? idea.shipped_url);
+                        if (!deployHref) {
+                          return (
+                            <span>
+                              {idea.deploy_url ?? idea.shipped_url ?? "No deployed URL"}
+                            </span>
+                          );
+                        }
+                        return (
+                          <a
+                            href={deployHref}
+                            className="underline decoration-2 decoration-accent underline-offset-4"
+                            target="_blank"
+                            rel="noreferrer"
+                          >
+                            Deployed URL
+                          </a>
+                        );
+                      })()}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>

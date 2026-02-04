@@ -111,7 +111,7 @@ export default function RootLayout({
                       </Link>
                     </li>
                     <li>
-                      <Link href="/leaderboard" className="hover:text-ink">
+                      <Link href="/receipts" className="hover:text-ink">
                         Receipts
                       </Link>
                     </li>
