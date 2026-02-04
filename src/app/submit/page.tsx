@@ -12,8 +12,7 @@ export default function SubmitPage() {
             Send us a focused, helpful micro-product.
           </h1>
           <p className="max-w-3xl text-sm text-ink/70">
-            Compact ideas that can be built quickly and tested in the real
-            world.
+            Compact ideas that can be built quickly and tested in the real world.
           </p>
         </div>
       </section>

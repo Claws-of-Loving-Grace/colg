@@ -13,15 +13,15 @@ export default function NotFound() {
           This space is empty.
         </h2>
         <p className="max-w-xl text-base text-ink/70">
-          The page you requested is not available. Head back home or submit a
-          fresh idea to keep the loop moving.
+          The page you requested is not available. Head back home or submit a fresh idea
+          to keep the loop moving.
         </p>
         <div className="flex flex-col gap-4 sm:flex-row">
           <Link
             className={cn(
               buttonVariants({ variant: "primary" }),
               "sharp-corners",
-              "w-full justify-center sm:w-auto"
+              "w-full justify-center sm:w-auto",
             )}
             href="/"
           >
@@ -31,7 +31,7 @@ export default function NotFound() {
             className={cn(
               buttonVariants({ variant: "secondary" }),
               "sharp-corners",
-              "w-full justify-center sm:w-auto"
+              "w-full justify-center sm:w-auto",
             )}
             href="/submit"
           >

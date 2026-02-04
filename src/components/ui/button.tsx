@@ -9,8 +9,7 @@ export const buttonVariants = cva(
       variant: {
         primary:
           "border-transparent bg-ink text-paper hover:border-ink hover:bg-paper hover:text-ink",
-        secondary:
-          "border-ink bg-transparent text-ink hover:bg-ink hover:text-paper",
+        secondary: "border-ink bg-transparent text-ink hover:bg-ink hover:text-paper",
         ghost: "border-transparent bg-transparent text-ink hover:bg-muted",
         link: "border-transparent bg-transparent text-ink underline-offset-4 decoration-2 decoration-accent hover:underline",
       },
@@ -18,7 +17,7 @@ export const buttonVariants = cva(
     defaultVariants: {
       variant: "primary",
     },
-  }
+  },
 );
 
 export type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> &

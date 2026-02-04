@@ -61,7 +61,8 @@ const HOMOGLYPHS: Record<string, string> = {
 const ZERO_WIDTH_RE = /[\u200B-\u200D\u2060\uFEFF]/g;
 const DOT_FORMS_RE = /(\(dot\)|\[dot\]|\{dot\})/gi;
 const DOT_WORD_RE = /\b\s*dot\s*\b/gi;
-const URL_RE = /(https?:\/\/[^\s]+|\b[a-z0-9.-]+\.[a-z]{2,}(?:\/[\w\-.~:/?#\[\]@!$&'()*+,;=%]*)?)/gi;
+const URL_RE =
+  /(https?:\/\/[^\s]+|\b[a-z0-9.-]+\.[a-z]{2,}(?:\/[\w\-.~:/?#\[\]@!$&'()*+,;=%]*)?)/gi;
 const DENYLIST = [
   "bit.ly",
   "t.co",

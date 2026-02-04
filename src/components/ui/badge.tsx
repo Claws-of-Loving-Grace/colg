@@ -15,7 +15,7 @@ const badgeVariants = cva(
     defaultVariants: {
       variant: "secondary",
     },
-  }
+  },
 );
 
 export type BadgeProps = HTMLAttributes<HTMLSpanElement> &

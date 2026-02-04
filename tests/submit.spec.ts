@@ -45,7 +45,7 @@ test.describe("Submit Idea", () => {
     await page.getByRole("button", { name: /submit idea/i }).click();
 
     await expect(
-      page.getByRole("heading", { name: /your idea has been submitted/i })
+      page.getByRole("heading", { name: /your idea has been submitted/i }),
     ).toBeVisible();
 
     expect(receivedPayload?.title).toBe("Quiet Hours Finder");

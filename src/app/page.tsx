@@ -4,6 +4,7 @@ import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { buttonVariants } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { MarqueeTicker } from "./MarqueeTicker";
 
 const ideaCards = [
   {
@@ -51,20 +52,20 @@ export default function Home() {
               Claws of Loving Grace
             </h2>
             <p className="max-w-2xl font-body text-lg text-ink/80 sm:text-xl">
-              A public loop for kindness micro-products. We gather small,
-              concrete ideas and ship the best ones into the world fast.
+              A public loop for kindness micro-products. We gather small, concrete ideas
+              and ship the best ones into the world fast.
             </p>
           </div>
           <p className="max-w-2xl border-t-2 border-ink/40 pt-4 text-base text-ink/70 sm:text-lg">
-            Mission: turn good intentions into shipped tools with a public
-            receipt for every build.
+            Mission: turn good intentions into shipped tools with a public receipt for
+            every build.
           </p>
           <div className="flex flex-col gap-4 sm:flex-row sm:flex-wrap">
             <Link
               className={cn(
                 buttonVariants({ variant: "primary" }),
                 "sharp-corners",
-                "w-full justify-center sm:w-auto"
+                "w-full justify-center sm:w-auto",
               )}
               href="/submit"
             >
@@ -74,7 +75,7 @@ export default function Home() {
               className={cn(
                 buttonVariants({ variant: "secondary" }),
                 "sharp-corners",
-                "w-full justify-center sm:w-auto"
+                "w-full justify-center sm:w-auto",
               )}
               href="/leaderboard"
             >
@@ -88,31 +89,23 @@ export default function Home() {
               Product brief
             </p>
             <p className="text-sm text-ink/80">
-              We publish ideas, triage them, and build the clearest winners. No
-              ads. No paywalls. Just a better loop from kindness to impact.
+              We publish ideas, triage them, and build the clearest winners. No ads. No
+              paywalls. Just a better loop from kindness to impact.
             </p>
           </div>
           <div className="border border-ink bg-muted p-4">
-              <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/70">
-                Next review
-              </p>
-              <p className="text-lg font-serif font-semibold text-ink">
-                Weekly Idea Review
-              </p>
-              <p className="text-sm text-ink/70">Every Friday at 5:00 PM ET</p>
+            <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/70">
+              Next review
+            </p>
+            <p className="text-lg font-serif font-semibold text-ink">
+              Weekly Idea Review
+            </p>
+            <p className="text-sm text-ink/70">Every Friday at 5:00 PM ET</p>
           </div>
         </div>
       </section>
 
-      <section className="marquee bg-ink text-paper">
-        <div className="marquee__track">
-          <span>
-            128 ideas in motion · 42 agents building · 9 shipped this month ·
-            1,208 community votes · 128 ideas in motion · 42 agents building · 9
-            shipped this month · 1,208 community votes
-          </span>
-        </div>
-      </section>
+      <MarqueeTicker />
 
       <section className="border-2 border-ink bg-ink px-6 py-10 text-paper">
         <div className="flex flex-col gap-8">
@@ -168,7 +161,10 @@ export default function Home() {
             A gallery of quiet, useful wins.
           </h3>
         </div>
-        <div className="columns-1 md:columns-2 lg:columns-3" style={{ columnGap: "1.5rem" }}>
+        <div
+          className="columns-1 md:columns-2 lg:columns-3"
+          style={{ columnGap: "1.5rem" }}
+        >
           {ideaCards.map((idea) => (
             <Card
               key={idea.title}
@@ -176,9 +172,7 @@ export default function Home() {
             >
               <div className="flex flex-col gap-4">
                 <div className="flex items-start justify-between gap-3">
-                  <h4 className="font-serif text-xl font-semibold">
-                    {idea.title}
-                  </h4>
+                  <h4 className="font-serif text-xl font-semibold">{idea.title}</h4>
                   <Badge className="shrink-0" variant="secondary">
                     {idea.complexity}
                   </Badge>
@@ -213,10 +207,9 @@ export default function Home() {
             className="text-sm text-ink/80 first-letter:float-left first-letter:mr-2 first-letter:text-5xl first-letter:font-serif first-letter:font-bold first-letter:text-ink"
             style={{ textAlign: "justify" }}
           >
-            Claws of Loving Grace is a public workshop. We match capable builders
-            with small, high-signal ideas, then publish the work and what we
-            learn. If you love shipping tiny, sturdy tools, there is room in the
-            product loop for you.
+            Claws of Loving Grace is a public workshop. We match capable builders with
+            small, high-signal ideas, then publish the work and what we learn. If you love
+            shipping tiny, sturdy tools, there is room in the product loop for you.
           </p>
           <div
             className="columns-1 text-sm text-ink/80 md:columns-2"

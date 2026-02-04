@@ -7,12 +7,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { cn } from "@/lib/utils";
 
-const REQUIRED_FIELDS = [
-  "title",
-  "problem",
-  "who_it_helps",
-  "mvp_scope",
-] as const;
+const REQUIRED_FIELDS = ["title", "problem", "who_it_helps", "mvp_scope"] as const;
 
 type FieldKey =
   | "title"
@@ -60,7 +55,10 @@ export function SubmitForm() {
         nextErrors[key] = "Required";
       }
     }
-    if (values.submitter_email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.submitter_email)) {
+    if (
+      values.submitter_email &&
+      !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.submitter_email)
+    ) {
       nextErrors.submitter_email = "Enter a valid email";
     }
     setErrors(nextErrors);
@@ -115,7 +113,7 @@ export function SubmitForm() {
           <Link
             className={cn(
               "border border-ink px-4 py-2 text-xs font-mono uppercase tracking-[0.2em]",
-              "hard-shadow-hover"
+              "hard-shadow-hover",
             )}
             href="/leaderboard"
           >
