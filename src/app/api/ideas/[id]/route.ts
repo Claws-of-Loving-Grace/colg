@@ -26,6 +26,26 @@ type IdeaDetailRow = {
   vote_count: number;
 };
 
+type BuildArtifactRow = {
+  id: string;
+  agent_id: string;
+  pr_url: string | null;
+  deploy_url: string | null;
+  status: string;
+  claimed_at: string;
+  completed_at: string | null;
+};
+
+type ReceiptRow = {
+  id: string;
+  artifact_id: string;
+  summary: string;
+  metric: string;
+  next_steps: string | null;
+  shipped_url: string | null;
+  created_at: string;
+};
+
 function parseJson<T>(raw: string | null, fallback: T): T {
   if (!raw) return fallback;
   try {
@@ -83,12 +103,34 @@ export async function GET(
     return NextResponse.json({ error: "Idea not found" }, { status: 404 });
   }
 
+  const artifactRow = await env.DB.prepare(
+    `SELECT id, agent_id, pr_url, deploy_url, status, claimed_at, completed_at
+     FROM build_artifacts
+     WHERE idea_id = ?
+     ORDER BY claimed_at DESC
+     LIMIT 1`,
+  )
+    .bind(ideaId)
+    .first<BuildArtifactRow>();
+
+  const receiptRow = await env.DB.prepare(
+    `SELECT id, artifact_id, summary, metric, next_steps, shipped_url, created_at
+     FROM receipts
+     WHERE idea_id = ?
+     ORDER BY created_at DESC
+     LIMIT 1`,
+  )
+    .bind(ideaId)
+    .first<ReceiptRow>();
+
   const idea = {
     ...ideaRow,
     tags: parseJson<Record<string, string>>(ideaRow.tags, {}),
     score_components: parseJson<Record<string, number>>(ideaRow.score_components, {}),
     clarifying_questions: parseJson<string[]>(ideaRow.clarifying_questions, []),
     clarifying_responses: parseJson<string[]>(ideaRow.clarifying_responses, []),
+    build_artifact: artifactRow ?? null,
+    receipt: receiptRow ?? null,
   };
 
   return NextResponse.json({ idea });

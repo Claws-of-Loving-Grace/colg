@@ -26,6 +26,7 @@ declare global {
     OPENAI_API_KEY?: string;
     SCAN_DISABLE?: string;
     BOT_API_KEYS?: string;
+    ADMIN_API_KEYS?: string;
   }
 }
 

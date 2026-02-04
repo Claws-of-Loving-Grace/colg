@@ -36,6 +36,9 @@ type IdeaListRow = {
   created_at: string;
   updated_at: string;
   vote_count: number;
+  receipt_id: string | null;
+  shipped_url: string | null;
+  deploy_url: string | null;
 };
 
 function escapeHtml(value: string) {
@@ -133,7 +136,28 @@ export async function GET(request: Request) {
       i.score,
       i.created_at,
       i.updated_at,
-      COUNT(v.id) AS vote_count
+      COUNT(v.id) AS vote_count,
+      (
+        SELECT r.id
+        FROM receipts r
+        WHERE r.idea_id = i.id
+        ORDER BY r.created_at DESC
+        LIMIT 1
+      ) AS receipt_id,
+      (
+        SELECT r.shipped_url
+        FROM receipts r
+        WHERE r.idea_id = i.id
+        ORDER BY r.created_at DESC
+        LIMIT 1
+      ) AS shipped_url,
+      (
+        SELECT b.deploy_url
+        FROM build_artifacts b
+        WHERE b.idea_id = i.id
+        ORDER BY b.claimed_at DESC
+        LIMIT 1
+      ) AS deploy_url
     FROM ideas i
     LEFT JOIN votes v ON v.idea_id = i.id
     WHERE ${whereClause}
