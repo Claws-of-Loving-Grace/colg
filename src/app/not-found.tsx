@@ -7,14 +7,14 @@ export default function NotFound() {
     <section className="border-2 border-ink bg-paper p-8">
       <div className="flex flex-col gap-5">
         <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/70">
-          Story not found
+          Page not found
         </p>
         <h2 className="font-serif text-4xl font-bold sm:text-5xl">
-          This column is blank.
+          This space is empty.
         </h2>
         <p className="max-w-xl text-base text-ink/70">
-          The page you requested did not make it to press. Head back to the
-          front page or submit a fresh idea for the next edition.
+          The page you requested is not available. Head back home or submit a
+          fresh idea to keep the loop moving.
         </p>
         <div className="flex flex-col gap-4 sm:flex-row">
           <Link
@@ -25,7 +25,7 @@ export default function NotFound() {
             )}
             href="/"
           >
-            Return to Front Page
+            Return home
           </Link>
           <Link
             className={cn(

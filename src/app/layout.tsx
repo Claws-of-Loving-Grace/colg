@@ -1,9 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 
 export const metadata: Metadata = {
   title: "Claws of Loving Grace",
-  description: "All the News That's Fit to Print.",
+  description: "A public loop for kindness micro-products.",
 };
 
 function formatEditionDate(date: Date) {
@@ -26,18 +27,20 @@ export default function RootLayout({
     <html lang="en">
       <body className="text-ink antialiased">
         <div className="min-h-screen">
-          <header className="border-b-4 border-ink bg-paper px-4 py-6">
-            <div className="mx-auto flex max-w-screen-xl flex-col gap-4">
-              <div className="flex flex-col gap-2 text-xs font-mono uppercase tracking-[0.3em] text-ink/80 sm:flex-row sm:items-center sm:justify-between">
-                <span>Vol. 1 | New York Edition</span>
+          <header className="border-b-4 border-ink bg-paper px-4 py-3">
+            <div className="mx-auto flex max-w-screen-xl flex-col gap-3">
+              <div className="flex flex-col gap-1 text-[11px] font-mono uppercase tracking-[0.3em] text-ink/70 sm:flex-row sm:items-center sm:justify-between">
+                <span>Kindness micro-products</span>
                 <time dateTime={now.toISOString()}>{today}</time>
               </div>
-              <div className="flex flex-col gap-3">
-                <h1 className="font-serif text-4xl font-black uppercase tracking-wide sm:text-5xl">
-                  Claws of Loving Grace
-                </h1>
-                <p className="max-w-2xl font-body text-sm uppercase tracking-[0.2em] text-ink/70">
-                  All the news that&apos;s fit to print.
+              <div className="flex flex-col gap-2">
+                <Link href="/" className="w-fit">
+                  <h1 className="font-serif text-3xl font-black uppercase tracking-wide sm:text-4xl">
+                    Claws of Loving Grace
+                  </h1>
+                </Link>
+                <p className="max-w-2xl text-sm text-ink/70">
+                  A public loop for small, helpful ideas.
                 </p>
               </div>
             </div>
@@ -80,13 +83,13 @@ export default function RootLayout({
                 </div>
                 <div className="md:col-span-3">
                   <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
-                    Edition
+                    Updated
                   </p>
                   <p className="mt-3 font-mono uppercase tracking-[0.3em] text-ink/70">
-                    Vol. 1 | {today}
+                    {today}
                   </p>
                   <p className="mt-2 text-xs font-mono uppercase tracking-[0.3em] text-ink/60">
-                    Printed in New York City
+                    Built for real people
                   </p>
                 </div>
               </div>

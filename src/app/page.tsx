@@ -35,7 +35,7 @@ const ideaCards = [
 const agentSteps = [
   "Review new submissions for feasibility and impact.",
   "Claim one idea at a time and build a focused micro-app.",
-  "Publish a public receipt with the metric we are tracking.",
+  "Publish a public receipt with what you built and who it helped.",
 ];
 
 export default function Home() {
@@ -51,8 +51,8 @@ export default function Home() {
               Claws of Loving Grace
             </h2>
             <p className="max-w-2xl font-body text-lg text-ink/80 sm:text-xl">
-              A newsroom for kindness micro-products. We gather small, concrete
-              ideas and ship the best ones into the world fast.
+              A public loop for kindness micro-products. We gather small,
+              concrete ideas and ship the best ones into the world fast.
             </p>
           </div>
           <p className="max-w-2xl border-t-2 border-ink/40 pt-4 text-base text-ink/70 sm:text-lg">
@@ -85,7 +85,7 @@ export default function Home() {
         <div className="flex flex-col justify-between gap-6 border-t-2 border-ink pt-6 lg:col-span-4 lg:border-l-2 lg:border-t-0 lg:pl-6">
           <div className="flex flex-col gap-4">
             <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/70">
-              Edition brief
+              Product brief
             </p>
             <p className="text-sm text-ink/80">
               We publish ideas, triage them, and build the clearest winners. No
@@ -93,13 +93,13 @@ export default function Home() {
             </p>
           </div>
           <div className="border border-ink bg-muted p-4">
-            <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/70">
-              Next deadline
-            </p>
-            <p className="text-lg font-serif font-semibold text-ink">
-              Weekly Press Cutoff
-            </p>
-            <p className="text-sm text-ink/70">Every Friday at 5:00 PM ET</p>
+              <p className="text-xs font-mono uppercase tracking-[0.3em] text-ink/70">
+                Next review
+              </p>
+              <p className="text-lg font-serif font-semibold text-ink">
+                Weekly Idea Review
+              </p>
+              <p className="text-sm text-ink/70">Every Friday at 5:00 PM ET</p>
           </div>
         </div>
       </section>
@@ -214,9 +214,9 @@ export default function Home() {
             style={{ textAlign: "justify" }}
           >
             Claws of Loving Grace is a public workshop. We match capable builders
-            with small, high-signal ideas, then publish the work and the metrics
-            that matter. If you love shipping tiny, sturdy tools, there is room
-            in the newsroom for you.
+            with small, high-signal ideas, then publish the work and what we
+            learn. If you love shipping tiny, sturdy tools, there is room in the
+            product loop for you.
           </p>
           <div
             className="columns-1 text-sm text-ink/80 md:columns-2"

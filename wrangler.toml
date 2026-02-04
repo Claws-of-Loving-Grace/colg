@@ -4,8 +4,17 @@ compatibility_date = "2026-02-04"
 compatibility_flags = ["nodejs_compat"]
 assets = { directory = ".open-next/assets", binding = "ASSETS" }
 
+[vars]
+SCAN_DISABLE = "1"
+OPENAI_API_KEY = ""
+
 [[d1_databases]]
 binding = "DB"
 database_name = "colg"
 database_id = "05726e5c-7811-4fb4-b59e-2e05ae1afe12"
 migrations_dir = "migrations"
+
+[[kv_namespaces]]
+binding = "RATE_LIMIT"
+id = "REPLACE_WITH_KV_ID"
+preview_id = "REPLACE_WITH_KV_PREVIEW_ID"
