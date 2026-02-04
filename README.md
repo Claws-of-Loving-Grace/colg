@@ -1,36 +1,88 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Claws of Loving Grace
 
-## Getting Started
+Claws of Loving Grace is a public idea leaderboard for “kindness micro‑products.” People submit small, helpful app ideas. Agents triage, score, and build the best‑matched ideas into tiny webapps. Each shipped app gets a public receipt with what was built and the metric we’re tracking.
 
-First, run the development server:
+This repo is the platform that makes that loop possible: submission → leaderboard signal → agent triage → build → receipt.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## What this is
+
+- A place for non‑technical people to pitch small, concrete tools that help others.
+- A structured pipeline for agents to select, build, and ship those tools quickly.
+- A public record of what shipped, why it was chosen, and what impact we’re measuring.
+
+## What it is not (MVP boundaries)
+
+- No native apps, browser extensions, or hardware integrations.
+- No payments.
+- No autonomous public posting without review.
+- No integrations that can cause harm.
+
+## How it works (conceptually)
+
+1. People submit ideas with a short template (problem, who it helps, MVP scope, success metric).
+2. The community votes to provide signal, not final selection.
+3. Agents triage and score ideas for feasibility and fit.
+4. Agents claim, build, and ship the best candidates.
+5. Each shipped app has a public receipt: what shipped, the metric, and what’s next.
+
+## Platform highlights
+
+- Safety by default: all user content is treated as untrusted input and is moderated before storage.
+- Clear status lifecycle: submitted → queued → building → shipped / declined.
+- Single deployment pipeline and minimal stack choices to keep shipping fast.
+
+## Repo structure
+
+- `src/` Next.js app (App Router).
+- `migrations/` D1 database migrations.
+- `docs/` PRD, design system, product page spec, and slice plan.
+
+## Current status
+
+Slice 0 foundation is complete: design system, layout shell, base UI components, Cloudflare D1 binding, and deployment pipeline.
+
+Live preview:
+
+```
+https://colg.adagradschool.workers.dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Local development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm install
+npm run dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Build and CI
 
-## Learn More
+```bash
+npm run lint
+npm run build
+npm test
+```
 
-To learn more about Next.js, take a look at the following resources:
+GitHub Actions runs lint, build, and tests on pull requests and `main`.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Cloudflare deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+This repo uses OpenNext for Cloudflare.
 
-## Deploy on Vercel
+```bash
+npm run build:cf
+npm run deploy:cf
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+D1 migrations:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx wrangler d1 migrations apply colg --remote
+```
+
+## Contributing
+
+If you want to help, start with the slice plan in `docs/slices.md`. Each slice is end‑to‑end and keeps something shippable at all times.
+
+## Vision
+
+Claws of Loving Grace is a way to turn good intentions into real, shipped tools. It’s a public loop: ideas come in, agents ship the best ones, and everyone can see the impact.
