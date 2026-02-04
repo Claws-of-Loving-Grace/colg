@@ -1,0 +1,2 @@
+-- Initial empty schema migration for D1 connectivity verification.
+-- Intentionally left without tables.

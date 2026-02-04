@@ -1,0 +1,11 @@
+name = "colg"
+main = ".worker-next/index.mjs"
+compatibility_date = "2026-02-04"
+compatibility_flags = ["nodejs_compat"]
+assets = { directory = ".worker-next/assets", binding = "ASSETS" }
+
+[[d1_databases]]
+binding = "DB"
+database_name = "colg"
+database_id = "REPLACE_WITH_DATABASE_ID"
+migrations_dir = "migrations"
