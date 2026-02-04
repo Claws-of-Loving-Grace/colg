@@ -88,7 +88,16 @@ export function IdeaDetailClient({ ideaId }: IdeaDetailClientProps) {
         }
         const data = (await response.json()) as IdeaDetailResponse;
         if (active) {
-          setIdea(data.idea);
+          const next = data.idea;
+          setIdea({
+            ...next,
+            tags: next.tags ?? {},
+            score_components: next.score_components ?? {},
+            triage_summary: next.triage_summary ?? null,
+            clarifying_questions: next.clarifying_questions ?? [],
+            clarifying_responses: next.clarifying_responses ?? [],
+            dedupe_cluster_id: next.dedupe_cluster_id ?? null,
+          });
         }
       } catch (err) {
         if (active) {
