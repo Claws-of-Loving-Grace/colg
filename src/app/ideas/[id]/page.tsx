@@ -29,22 +29,26 @@ export async function generateMetadata({
     LIMIT 1
   `;
 
-  const row = await env.DB.prepare(query)
-    .bind(id, ...PUBLIC_STATUSES)
-    .first<{ title: string; problem: string }>();
+  try {
+    const row = await env.DB.prepare(query)
+      .bind(id, ...PUBLIC_STATUSES)
+      .first<{ title: string; problem: string }>();
 
-  if (!row) {
-    return { title: "Idea not found" };
-  }
+    if (!row) {
+      return { title: "Idea not found" };
+    }
 
-  return {
-    title: row.title,
-    description: truncate(row.problem),
-    openGraph: {
+    return {
       title: row.title,
       description: truncate(row.problem),
-    },
-  };
+      openGraph: {
+        title: row.title,
+        description: truncate(row.problem),
+      },
+    };
+  } catch {
+    return { title: "Idea detail" };
+  }
 }
 
 export default async function IdeaDetailPage({
